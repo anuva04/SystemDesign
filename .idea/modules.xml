@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/ElevatorSystem.iml" filepath="$PROJECT_DIR$/ElevatorSystem.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SystemDesign.iml" filepath="$PROJECT_DIR$/SystemDesign.iml" />
     </modules>
   </component>
 </project>
