@@ -9,11 +9,11 @@ The `ElevatorSystem` class is the main controller class for the elevator system.
 ### Class Structure
 
 - `ElevatorSystem`
-    - `elevatorList`: A list of elevators in the system.
-    - `numElevators`: The number of elevators currently in the system.
-    - `requests`: A queue to store elevator requests from external switches.
-    - `requestProcessorScheduler`: A scheduled executor service for processing elevator requests.
-    - `allocationStrategy`: The elevator allocation strategy used to assign elevators to requests.
+  - `elevatorList`: A list of elevators in the system.
+  - `numElevators`: The number of elevators currently in the system.
+  - `requests`: A queue to store elevator requests from external switches.
+  - `requestProcessorScheduler`: A scheduled executor service for processing elevator requests.
+  - `allocationStrategy`: The elevator allocation strategy used to assign elevators to requests.
 
 ### Methods
 
@@ -31,14 +31,14 @@ The `Elevator` class represents an elevator in the system. It maintains informat
 ### Class Structure
 
 - `Elevator`
-    - `requestProcessorScheduler`: A scheduled executor service for processing elevator requests.
-    - `id`: The unique identifier of the elevator.
-    - `currentFloor`: The current floor where the elevator is located.
-    - `status`: The status of the elevator (e.g., working, out of service).
-    - `floors`: A list to track the floors where the elevator has stops.
-    - `direction`: The direction in which the elevator is moving.
-    - `maxCapacity`: The maximum capacity of the elevator.
-    - `currentCapacity`: The current number of passengers in the elevator.
+  - `requestProcessorScheduler`: A scheduled executor service for processing elevator requests.
+  - `id`: The unique identifier of the elevator.
+  - `currentFloor`: The current floor where the elevator is located.
+  - `status`: The status of the elevator (e.g., working, out of service).
+  - `floors`: A list to track the floors where the elevator has stops.
+  - `direction`: The direction in which the elevator is moving.
+  - `maxCapacity`: The maximum capacity of the elevator.
+  - `currentCapacity`: The current number of passengers in the elevator.
 
 ### Methods
 
@@ -54,7 +54,7 @@ The `ElevatorAllocationStrategy` interface defines the contract for different st
 ### Interface Structure
 
 - `ElevatorAllocationStrategy`
-    - `getElevator(List<Elevator> elevatorList, int floor)`: Assigns an elevator from the given list to the specified floor.
+  - `getElevator(List<Elevator> elevatorList, int floor)`: Assigns an elevator from the given list to the specified floor.
 
 ### SimpleElevatorAllocationStrategy
 
@@ -67,20 +67,6 @@ The `SimpleElevatorAllocationStrategy` class is an implementation of the `Elevat
 #### Methods
 
 - `getElevator(List<Elevator> elevatorList, int floor)`: Assigns the elevator with the closest distance to the specified floor, considering factors such as elevator direction and current capacity.
----
-#### Java Version
-
-The code is written in Java 11.
-
-#### Build System
-
-The build system used for this project is Maven. Maven provides a standard project structure and handles dependencies, compilation, and packaging.
-
-To build the project using Maven, navigate to the root directory of the project and run the following command:
-
-`mvn clean install`
-
-This will compile the source code, run tests, and package the project into a JAR file.
 
 ---
 
