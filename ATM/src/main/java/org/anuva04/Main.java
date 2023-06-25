@@ -41,10 +41,10 @@ public class Main {
         atm.setCashDispenserStrategy(new SimpleCashDispenseStrategy());
         Scanner sc = new Scanner(System.in);
 
-        while(true){
-            System.out.println("User login: 1 \nAdmin login: 2");
+        while (true) {
+            System.out.println("1: User login\n2: Admin login");
             int loginType = sc.nextInt();
-            switch(loginType){
+            switch (loginType) {
                 case 1:
                     // ATM card insertion stage
                     AtmCard dummyAtmCard = new SbiRupayCard("1234321", 999, "Anuva", LocalDate.now());

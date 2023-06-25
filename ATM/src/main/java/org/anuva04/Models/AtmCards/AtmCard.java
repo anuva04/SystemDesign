@@ -4,6 +4,7 @@ import org.anuva04.Enums.PaymentNetwork;
 import org.anuva04.Models.Bank;
 
 import java.time.LocalDate;
+
 public class AtmCard {
     private String cardNumber;
     private int CVV;

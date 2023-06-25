@@ -33,11 +33,11 @@ public class ATM {
         while (true) {
             System.out.println("Choose an option: ");
             System.out.println(
-                    "Withdraw cash: 1\n" +
-                            "Change Pin: 2\n" +
-                            "Check balance: 3\n" +
-                            "Get mini statement: 4\n" +
-                            "Exit: 5");
+                            "1: Withdraw cash\n" +
+                            "2: Change Pin\n" +
+                            "3: Check balance\n" +
+                            "4: Get mini statement\n" +
+                            "5: Exit");
             int option = sc.nextInt();
             boolean exit = false;
             switch (option) {
@@ -60,7 +60,9 @@ public class ATM {
                 default:
                     System.out.println("Invalid option!!!");
             }
-            if (exit) break;
+            if (exit) {
+                break;
+            }
         }
     }
 
@@ -72,7 +74,9 @@ public class ATM {
 
     // Method to verify admin login
     public boolean adminLogin(String password) {
-        if (password.equalsIgnoreCase("admin12345")) return true;
+        if (password.equalsIgnoreCase("admin12345")) {
+            return true;
+        }
         return false;
     }
 }
