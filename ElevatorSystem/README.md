@@ -84,7 +84,7 @@ This will compile the source code, run tests, and package the project into a JAR
 
 ---
 
-### TODO
+### Scope for developments
 - Error Handling and Exception Handling: The code lacks explicit error handling and exception handling mechanisms. Adding appropriate error handling and exception handling would make the code more robust and reliable.
 - Improve Logging: Instead of using System.out.println() for logging, consider using a logging framework such as Log4j or java.util.logging. This allows for more advanced logging capabilities, such as log levels, log file rotation, and customizable log formats.
 - Implement Unit Tests: Write unit tests to verify the functionality of the classes and ensure that they work as expected. This will help catch bugs early and make it easier to maintain and refactor the code in the future.
