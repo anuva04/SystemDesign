@@ -34,7 +34,7 @@ public class AdminOperations {
             int slot = sc.nextInt();
             if(slot == 0) {
                 break;
-            } else if(slot > vm.inventory.size()){
+            } else if(slot > vm.inventory.size() || slot < 0){
                 System.out.println("Invalid slot number!");
                 break;
             }
