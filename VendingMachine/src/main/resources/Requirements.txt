@@ -1,0 +1,10 @@
+Functional Requirements:
+1. Vending machine (VM) displays available items, their codes and prices.
+2. User can choose to pay with cash or card (debit or credit card).
+    2.a. If paying with cash, VM will return change (if any) if available.
+    2.b. If change not available, VM will return entire amount and not dispense any item.
+3. Emergency contact number is available to reach out to in case of hardware failures.
+4. User has the option to cancel transaction at any point before item is dispensed.
+5. Admin should be able to insert/remove items from VM.
+    5.a. To do so, admin can insert card and enter PIN to get access to VM.
+    5.b. Once items are modified, VM updates its metadata automatically.
