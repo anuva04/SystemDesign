@@ -1,0 +1,9 @@
+Meeting scheduler will work under the scope of a single organization.
+Functional requirements:
+- User should be able to schedule a meeting at a desired time with desired participants.
+    - User can search for participants by their username.
+- User should be able to cancel self-created meetings.
+- User should be able to view meeting invites (self-created and invitations from others).
+    - User should be able to accept/decline invites -- not implemented yet.
+- User should be able to check others' schedules to determine suitable time for meeting.
+    - Schedule will be shown for next 30 days

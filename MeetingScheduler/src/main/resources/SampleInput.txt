@@ -1,0 +1,29 @@
+// Create new meeting by user1
+create-meeting --organizer user1 --startTime 2023-08-08T12:00 --duration 30 --title SampleMeeting --location MSTeams --invitees in1,in2,in3
+
+// Create another meeting for user1
+create-meeting --organizer user1 --startTime 2023-08-08T14:00 --duration 30 --title AnotherSampleMeeting --location MSTeams --invitees user2,in2,in4
+
+// Create new meeting for user2
+create-meeting --organizer user2 --startTime 2023-08-09T12:00 --duration 60 --title DifferentSampleMeeting --location MSTeams --invitees in1,in2,user1
+
+// Get meetings for user1
+get-meetings --username user1 --date 2023-08-08
+
+// Get meetings for user2
+get-meetings --username user2 --date 2023-08-08
+
+// Delete meeting by user1
+delete-meeting --meetingId <meeting_id> --requester user1
+
+// Change meeting time
+change-time --meetingId <meeting_id> --startTime 2023-08-15T12:00 --duration 25 --requester user2
+
+// Change meeting location
+change-location --meetingId <meeting_id> --location GoogleMeet --requester user2
+
+// Show calendar
+show-calendar --date 2023-08-08 --invitees user1,user2
+
+// Forward meeting
+forward-meeting --meetingId <meeting_id> --invitees newInvitee
