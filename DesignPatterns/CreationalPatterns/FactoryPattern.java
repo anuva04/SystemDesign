@@ -1,3 +1,12 @@
+/**
+    Factory pattern is used when we want to hide the logic of object creation from users.
+    In this pattern, a factory class containing a method "getObject" is exposed to the user.
+    In the implementation, "getObject" method returns an object of an abstract class.
+    Based on input provided by users at runtime, "getObject" chooses the type of concrete object to create.
+    This eliminates the need of coupling concrete object creation logic with client code and hence promotes loose-coupling.
+**/
+
+
 import java.util.*;
 public class FactoryPattern {
     public static void main(String[] args) {
