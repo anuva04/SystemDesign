@@ -20,7 +20,7 @@ public class FactoryPattern {
             System.out.println(pizzaName + " is not made in our restaurant!");
             return;
         }
-        pizza.makePizza();
+        pizza.getRecipe();
     }
 }
 
@@ -41,7 +41,7 @@ abstract class Pizza {
     protected String toppings;
     protected String crust;
 
-    protected abstract void makePizza();
+    protected abstract void getRecipe();
 
     protected void printPizzaDetails() {
         System.out.println("Cheese: " + this.cheese);
@@ -52,7 +52,7 @@ abstract class Pizza {
 
 class ThreeCheesePizza extends Pizza {
     @Override
-    public void makePizza() {
+    public void getRecipe() {
         this.cheese = "Mozzarella + Cheddar + Parmesan";
         this.toppings = "Only cheese!";
         this.crust = "Handmade extra thin crust";
@@ -63,7 +63,7 @@ class ThreeCheesePizza extends Pizza {
 
 class ChicagoDeepDishPizza extends Pizza {
     @Override
-    public void makePizza() {
+    public void getRecipe() {
         this.cheese = "Mozzarella + Parmesan";
         this.toppings = "Bacon + Pepperoni + Tomato";
         this.crust = "Thick cornmeal crust";
