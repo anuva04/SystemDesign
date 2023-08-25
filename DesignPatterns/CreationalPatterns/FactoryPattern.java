@@ -20,9 +20,7 @@ public class FactoryPattern {
             System.out.println(pizzaName + " is not made in our restaurant!");
             return;
         }
-        System.out.println("Cheese: " + pizza.getCheese());
-        System.out.println("Toppings: " + pizza.getToppings());
-        System.out.println("Crust: " + pizza.getCrust());
+        pizza.makePizza();
     }
 }
 
@@ -43,34 +41,34 @@ abstract class Pizza {
     protected String toppings;
     protected String crust;
 
-    protected Pizza(String cheese, String toppings, String crust) {
-        this.cheese = cheese;
-        this.toppings = toppings;
-        this.crust = crust;
-    }
+    protected abstract void makePizza();
 
-    public String getCheese() {
-        return this.cheese;
-    }
-
-    public String getToppings() {
-        return this.toppings;
-    }
-
-    public String getCrust() {
-        return this.crust;
+    protected void printPizzaDetails() {
+        System.out.println("Cheese: " + this.cheese);
+        System.out.println("Toppings: " + this.toppings);
+        System.out.println("Crust: " + this.crust);
     }
 }
 
 class ThreeCheesePizza extends Pizza {
-    public ThreeCheesePizza() {
-        super("Mozzarella + Cheddar + Parmesan", "Only cheese!", "Handmade thin crust");
+    @Override
+    public void makePizza() {
+        this.cheese = "Mozzarella + Cheddar + Parmesan";
+        this.toppings = "Only cheese!";
+        this.crust = "Handmade extra thin crust";
+        System.out.println("Cooking a three-cheese pizza...");
+        printPizzaDetails();
     }
 }
 
 class ChicagoDeepDishPizza extends Pizza {
-    public ChicagoDeepDishPizza() {
-        super("Mozzarella + Parmesan", "Bacon + Pepperoni + Tomato", "Thick cornmeal crust");
+    @Override
+    public void makePizza() {
+        this.cheese = "Mozzarella + Parmesan";
+        this.toppings = "Bacon + Pepperoni + Tomato";
+        this.crust = "Thick cornmeal crust";
+        System.out.println("Cooking a Chicago Deep Dish pizza...");
+        printPizzaDetails();
     }
 }
 
