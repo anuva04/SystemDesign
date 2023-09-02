@@ -4,6 +4,10 @@
     In the implementation, "getObject" method returns an object of an abstract class.
     Based on input provided by users at runtime, "getObject" chooses the type of concrete object to create.
     This eliminates the need of coupling concrete object creation logic with client code and hence promotes loose-coupling.
+
+    In this example, user provides pizza name to a factory.
+    Based on pizza name, factory determines which pizza object to create.
+    Each concrete pizza class has its own instructions for ingredients. User doesn't need to know about these details.
 **/
 
 
