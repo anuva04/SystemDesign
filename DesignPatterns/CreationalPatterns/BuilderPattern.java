@@ -2,7 +2,7 @@
  * Builder pattern is used in cases where object creation is a complex process
  * Complexity arises when a class has several fields and not all of them are necessary during object creation
  * This pattern provides separate methods for setting each of the fields
- * Once the final build() method is called, the object is created and thereafter it is immutable.`
+ * Once the final build() method is called, the object is created and thereafter it is immutable.
  */
 
 public class BuilderPattern {
