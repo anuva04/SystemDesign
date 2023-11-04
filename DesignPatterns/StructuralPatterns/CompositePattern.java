@@ -1,9 +1,16 @@
+/**
+ * Composite pattern is used in cases where we have a tree-like hierarchy of similar elements.
+ * In this example, there are multiple instances of folders and files in a tree-like directory.
+ * So we implement them from same interface and same methods are available to them.
+ * Composite elements are elements with children, while leaf elements have no children.
+ * We store a link of children/parent element in each element so that we are able to navigate through the tree.
+ */
+
 import java.util.*;
 import java.lang.UnsupportedOperationException;
 
 class CompositePattern {
     public static void main(String[] args) {
-        System.out.println("****************************************");
         Folder SystemDesign = new Folder("SystemDesign", null);
 
         Directory DesignPatterns = new Folder("DesignPatterns", SystemDesign);
