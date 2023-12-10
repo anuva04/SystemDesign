@@ -1,3 +1,13 @@
+/**
+ * This pattern lets you pass requests along a chain of processors until it reaches an appropriate processor which can handle it.
+ * User doesn't need to know about all the available processors.
+ * Only the head of the chain needs to be known to the users, and each processor can know its succeeding one.
+ * In this example, user is provided the head of the chain that is Leave Request processor.
+ * If the request provided by user is a leave request, it is handled immediately, else it is passed down the chain until an appropriate processor is found.
+ * If no processor can process it, an appropriate message is returned to the user.
+ * If new processors come in, they can be attached to the chain without any change required on the user side.
+ */
+
 class ChainOfResponsibilityPattern {
     public static void main(String[] args) {
         RequestProcessor requestProcessor = getRequestProcessor();
