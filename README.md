@@ -20,4 +20,4 @@ Table of contents:
         - [Proxy](https://github.com/anuva04/SystemDesign/blob/main/DesignPatterns/StructuralPatterns/ProxyPattern.java)
     - [Behavioral Patterns](https://github.com/anuva04/SystemDesign/tree/main/DesignPatterns/BehavioralPatterns)
         - [Chain of Responsibility](https://github.com/anuva04/SystemDesign/blob/main/DesignPatterns/BehavioralPatterns/ChainOfResponsibilityPattern.java)
-        - [Command](https://github.com/anuva04/SystemDesign/blob/main/DesignPatterns/BehavioralPatterns/Command.java)
+        - [Command](https://github.com/anuva04/SystemDesign/blob/main/DesignPatterns/BehavioralPatterns/CommandPattern.java)
