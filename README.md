@@ -22,3 +22,4 @@ Table of contents:
         - [Chain of Responsibility](https://github.com/anuva04/SystemDesign/blob/main/DesignPatterns/BehavioralPatterns/ChainOfResponsibilityPattern.java)
         - [Command](https://github.com/anuva04/SystemDesign/blob/main/DesignPatterns/BehavioralPatterns/CommandPattern.java)
         - [Iterator](https://github.com/anuva04/SystemDesign/blob/main/DesignPatterns/BehavioralPatterns/IteratorPattern.java)
+        - [Mediator](https://github.com/anuva04/SystemDesign/blob/main/DesignPatterns/BehavioralPatterns/MediatorPattern.java)
