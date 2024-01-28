@@ -24,3 +24,4 @@ Table of contents:
         - [Iterator](https://github.com/anuva04/SystemDesign/blob/main/DesignPatterns/BehavioralPatterns/IteratorPattern.java)
         - [Mediator](https://github.com/anuva04/SystemDesign/blob/main/DesignPatterns/BehavioralPatterns/MediatorPattern.java)
         - [Memento](https://github.com/anuva04/SystemDesign/blob/main/DesignPatterns/BehavioralPatterns/MementoPattern.java)
+        - [Observer](https://github.com/anuva04/SystemDesign/blob/main/DesignPatterns/BehavioralPatterns/ObserverPattern.java)
