@@ -1,5 +1,5 @@
 /**
- * This pattern is used when multiple objects needs to be updated (call subscribers) when a certain change occurs in an object's state (called observable).
+ * This pattern is used when multiple objects needs to be updated (called subscribers) when a certain change occurs in an object's state (called observable).
  * Instead of updating all subscribers of the change, or letting subscribers poll the publisher continuously,
  * the subscribers can subscribe to a system (called publisher) which will notify them whenever the observable's state changes.
  * In this example, channels are the observables.
