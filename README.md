@@ -26,3 +26,4 @@ Table of contents:
         - [Memento](https://github.com/anuva04/SystemDesign/blob/main/DesignPatterns/BehavioralPatterns/MementoPattern.java)
         - [Observer](https://github.com/anuva04/SystemDesign/blob/main/DesignPatterns/BehavioralPatterns/ObserverPattern.java)
         - [Template](https://github.com/anuva04/SystemDesign/blob/main/DesignPatterns/BehavioralPatterns/TemplatePattern.java)
+        - [State](https://github.com/anuva04/SystemDesign/blob/main/DesignPatterns/BehavioralPatterns/StatePattern.java)
