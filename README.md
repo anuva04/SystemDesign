@@ -27,3 +27,4 @@ Table of contents:
         - [Observer](https://github.com/anuva04/SystemDesign/blob/main/DesignPatterns/BehavioralPatterns/ObserverPattern.java)
         - [Template](https://github.com/anuva04/SystemDesign/blob/main/DesignPatterns/BehavioralPatterns/TemplatePattern.java)
         - [State](https://github.com/anuva04/SystemDesign/blob/main/DesignPatterns/BehavioralPatterns/StatePattern.java)
+        - [Strategy](https://github.com/anuva04/SystemDesign/blob/main/DesignPatterns/BehavioralPatterns/StrategyPattern.java)
