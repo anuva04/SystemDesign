@@ -28,3 +28,4 @@ Table of contents:
         - [Template](https://github.com/anuva04/SystemDesign/blob/main/DesignPatterns/BehavioralPatterns/TemplatePattern.java)
         - [State](https://github.com/anuva04/SystemDesign/blob/main/DesignPatterns/BehavioralPatterns/StatePattern.java)
         - [Strategy](https://github.com/anuva04/SystemDesign/blob/main/DesignPatterns/BehavioralPatterns/StrategyPattern.java)
+        - [Visitor](https://github.com/anuva04/SystemDesign/blob/main/DesignPatterns/BehavioralPatterns/VisitorPattern.java)
