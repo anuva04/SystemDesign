@@ -78,9 +78,9 @@ createdBy (userId of user who created this URL, optional)
 accessCount (number of times this shortUrl is accessed)
 ```
 
-The schema is very simple and can be stored in any SQL (TODO: example) or NoSQL (TODO: example) database. The DB can be sharded and indexed on `shortUrl` to optimize read requests which is supported by both SQL and NoSQL DBs.
+The schema is very simple and can be stored in any SQL (e.g., MySQL) or NoSQL (e.g., Amazon DynamoDB) database. The DB can be sharded and indexed on `shortUrl` to optimize read requests which is supported by both SQL and NoSQL DBs. `accessCount` can be updated asynchronously to reduce write load.
 
-As we want to retain data of last 5 years only, a cronjob can be run in the background every 24 hours to find and remove stale entries. Latency of a few hours is tolerable for this operation, so we don't need to optimize this query. Instead of actually removing stale entries, they can be archived to some data-lake (TODO: example) for long-term storage and analysis.
+As we want to retain data of last 5 years only, a cronjob can be run in the background every 24 hours to find and remove stale entries. Latency of a few hours is tolerable for this operation, so we don't need to optimize this query. Instead of actually removing stale entries, they can be archived to some data-lake (e.g., Amazon S3) for long-term storage and analysis. Amazon Redshift is also a good choice for data warehousing and analytics.
 
 ## High-level design
 ![URL Shortener architecture diagram](URLshortener.png)
@@ -116,14 +116,14 @@ Read requests would contain the shortUrl which can be used to determine which sh
 Hence, it is easy to scale both read and write services independently.
 
 #### Database replication
-Database should be replicated in multiple locations to ensure persistence in case of failure of one instance. Number of replicas depends on various factors such as criticality of the data, cost implications etc.
+Database should be replicated in multiple locations to ensure high durability. Number of replicas depends on various factors such as criticality of the data, cost implications etc.
 
-For each write requests, we may choose to write it on all DB replicas before returning a response to user. But that would increase latency. Alternatively, we can write the data in 1 DB instance a write-ahead log and then return a response while eventually updating rest of the replicas. This will reduce latency. Given, low read QPS and database sharding in place, reads can be served by 1 instance from each shard. So, eventually consistent replicas won't cause phantom read issue.
+For each write requests, we may choose to write it on all DB replicas before returning a response to user. But that would increase latency. Alternatively, we can write the data in 1 DB instance and a write-ahead log and then return a response while eventually updating rest of the replicas. This will reduce latency. Given, low read QPS and database sharding in place, reads can be served by 1 instance from each shard. So, eventually consistent replicas won't cause phantom read/write issue.
 
 #### Caching
 Some of the short links may be read much more than the others. As we are already storing accessCount of each URL, it should be easy to analyse. Considering 20% of records serving 80% of traffic, it amounts to `182.5/5 GB = 36.6GB` of data. This is a small amount and can be stored in a cache and served from there instead of hitting the DB.
 
-Once a short URL is created for an URL, there will be no modifications to it. A simple LRU cache should suffice our requirements, we don't need any TTL on cache records.
+Once a short URL is created for an URL, there will be no modifications to it. A simple LRU cache should suffice our requirements, we don't need any TTL on cache records. But we do need to remove entries that are deleted after 5 years because corresponding shortURls may be reused (i.e., a TTL of close to 5 years).
 
 #### Unique URL generation across multiple threads on same machine
 1 server machine can run multiple threads to handle multiple write requests at a time. So the above-mentioned URL generator logic can cause collisions. Solution is to add threadId to the shortURL along with instanceId and timestamp.
@@ -136,3 +136,5 @@ Also, in case of traffic spikes when each service has to be scaled out, a load b
 ## Follow-up questions
 1. What if we store user profiles and want to quickly fetch all the URLs created by a user?
 > We can create an index on `createdBy` field in `Url` table.
+2. How would you handle Analytics?
+3. How to handle URL generation if there is a sudden influx of write requests?
