@@ -30,8 +30,8 @@ Since read requests are 100x that of writes, `read QPS = 100*11.57 = 1157`.
 
 As each entry is approx. 500B, and we want to retain data for 5 years, `amount of storage required for 5 years = (size of each record)x(number of write requests per day)x(number of days in 5 years) = 500B x 1M x 365 x 5 = 912.5 GB`. This translates to `182.5 GB per year` or `15.2 GB per month`.
 
-Given 1157 Read QPS, `bandwidth required for read requests is 1157 x 500B = 578 MBps` <br>
-Similarly, `bandwidth required for write requests is 6 MBps`.
+Given 1157 Read QPS, `bandwidth required for read requests is 1157 x 500B = 578 KBps` <br>
+Similarly, `bandwidth required for write requests is 6 KBps`.
 
 Given, 1M writes per day, `number of unique URLs in 5 years = 1M x 365 x 5 = 1.825B`.
 As we will use the English alphabet and digits 0-9 only in the URL, `an URL of length 6 can have 56B combinations` which should suffice our requirement.
@@ -123,7 +123,7 @@ For each write requests, we may choose to write it on all DB replicas before ret
 #### Caching
 Some of the short links may be read much more than the others. As we are already storing accessCount of each URL, it should be easy to analyse. Considering 20% of records serving 80% of traffic, it amounts to `182.5/5 GB = 36.6GB` of data. This is a small amount and can be stored in a cache and served from there instead of hitting the DB.
 
-Once a short URL is created for an URL, there will be no modifications to it. A simple LRU cache should suffice our requirements, we don't need any TTL on cache records. But we do need to remove entries that are deleted after 5 years because corresponding shortURls may be reused (i.e., a TTL of close to 5 years).
+Once a short URL is created for a URL, there will be no modifications to it. A simple LRU cache should suffice our requirements, we don't need any TTL on cache records. But we do need to remove entries that are deleted after 5 years because corresponding shortURls may be reused (i.e., a TTL of close to 5 years).
 
 #### Unique URL generation across multiple threads on same machine
 1 server machine can run multiple threads to handle multiple write requests at a time. So the above-mentioned URL generator logic can cause collisions. Solution is to add threadId to the shortURL along with instanceId and timestamp.
