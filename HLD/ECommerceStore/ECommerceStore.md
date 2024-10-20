@@ -238,7 +238,9 @@ Apart from the above, CDN can be set up to serve static content like product ima
 
 Finally, caching strategies have to monitored continuously to ensure their effectiveness. Cache configurations might be optimized based on usage patterns observed from monitoring data.
 
-### Partitioning
+### Partitioning  and Replication
 As the amount of data is huge, a single DB instance cannot handle all the load. We can partition different tables and store them in separate DB shards.
 
 Search and Product data can be partition by Product type so that when a user queries for a particular keyword, request can be to specific shard for that product. Similarly, User, Order and Cart data can be partitioned by UserId to achieve homogeneously distributed traffic.
+
+Database tables should also be replicated to multiple instances to enhance reliability and persistence. Each DB shard can have a write master and some number of read replicas.
