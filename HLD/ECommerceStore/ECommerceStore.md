@@ -237,3 +237,8 @@ Cart service experiences large write traffic during sale or festive seasons. A s
 Apart from the above, CDN can be set up to serve static content like product images/videos, stylesheets and JS. Also, rate-limiting can be implemented to prevent overloading of services, especially when using external APIs for order processing or payment gateways.
 
 Finally, caching strategies have to monitored continuously to ensure their effectiveness. Cache configurations might be optimized based on usage patterns observed from monitoring data.
+
+### Partitioning
+As the amount of data is huge, a single DB instance cannot handle all the load. We can partition different tables and store them in separate DB shards.
+
+Search and Product data can be partition by Product type so that when a user queries for a particular keyword, request can be to specific shard for that product. Similarly, User, Order and Cart data can be partitioned by UserId to achieve homogeneously distributed traffic.
