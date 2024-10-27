@@ -3,6 +3,7 @@ Table of contents:
   - [Rate Limiter](https://github.com/anuva04/SystemDesign/blob/main/HLD/RateLimiter/RateLimiter.md)
   - [URL Shortener](https://github.com/anuva04/SystemDesign/blob/main/HLD/URLShortener/URLShortener.md)
   - [E-commerce Store](https://github.com/anuva04/SystemDesign/blob/main/HLD/ECommerceStore/ECommerceStore.md)
+  - [Twitter](https://github.com/anuva04/SystemDesign/blob/main/HLD/Twitter/Twitter.md)
 - [LLD](https://github.com/anuva04/SystemDesign/tree/main/LLD)
   - [ATM](https://github.com/anuva04/SystemDesign/tree/main/LLD/ATM)
   - [Elevator System](https://github.com/anuva04/SystemDesign/tree/main/LLD/ElevatorSystem)
