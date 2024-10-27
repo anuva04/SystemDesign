@@ -244,3 +244,7 @@ As the amount of data is huge, a single DB instance cannot handle all the load. 
 Search and Product data can be partition by Product type so that when a user queries for a particular keyword, request can be to specific shard for that product. Similarly, User, Order and Cart data can be partitioned by UserId to achieve homogeneously distributed traffic.
 
 Database tables should also be replicated to multiple instances to enhance reliability and persistence. Each DB shard can have a write master and some number of read replicas.
+
+## Follow-up questions
+
+1. How would you handle analytics?
