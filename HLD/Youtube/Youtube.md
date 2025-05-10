@@ -43,37 +43,37 @@ Thus, `the amount of storage required is 18.25B x average size of each video = 1
 
 #### API to stream a video
 1. Client first calls YouTube's streaming API
-```
-GET /api/stream?id={video_id}
-```
-Example JSON response:
-```JSON
-{
-  "video_id": "{video_id}",
-  "stream_url": "https://cdn.youtube.com/stream?v={video_id}",
-  "content_length": 50000000,
-  "mime_type": "video/mp4",
-  "bitrate": 5000000,
-  "resolution": "1920x1080",
-  "duration": 300,
-  "supports_range_requests": true
-}
-```
-The `stream_url` is where the actual video chunks are available.
+    ```
+    GET /api/stream?id={video_id}
+    ```
+    Example JSON response:
+    ```JSON
+    {
+      "video_id": "{video_id}",
+      "stream_url": "https://cdn.youtube.com/stream?v={video_id}",
+      "content_length": 50000000,
+      "mime_type": "video/mp4",
+      "bitrate": 5000000,
+      "resolution": "1920x1080",
+      "duration": 300,
+      "supports_range_requests": true
+    }
+    ```
+    The `stream_url` is where the actual video chunks are available.
 2. Client Requests a Video Chunk from `stream_url`
-```http
-GET https://{cdn_url}/stream?v={video_id}
-Range: bytes=1000000-1999999
-```
-Response:
-```http
-HTTP/1.1 206 Partial Content
-Content-Range: bytes 1000000-1999999/50000000
-Content-Type: video/mp4
-
-[binary video data in MIME format...]
-```
-YouTube client calls this CDN API multiple times with increasing `Content-Range`.
+    ```http
+    GET https://{cdn_url}/stream?v={video_id}
+    Range: bytes=1000000-1999999
+    ```
+    Response:
+    ```http
+    HTTP/1.1 206 Partial Content
+    Content-Range: bytes 1000000-1999999/50000000
+    Content-Type: video/mp4
+    
+    [binary video data in MIME format...]
+    ```
+    YouTube client calls this CDN API multiple times with increasing `Content-Range`.
 
 #### API to check likes and comments on a video
 ```
@@ -92,8 +92,7 @@ JSON response:
       "content": "{comment}",
       "timestamp": "{date}",
       "author": "{user_id}"
-    },
-    ...
+    }
   ]
 }
 ```
@@ -110,7 +109,7 @@ Body:
 JSON response:
 ```json
 {
-  "is_successful": true | false,
+  "is_successful": "true | false",
   "message": "{error message if any}"
 }
 ```
@@ -128,7 +127,7 @@ Body:
 JSON response:
 ```json
 {
-  "is_successful": true | false,
+  "is_successful": "true | false",
   "message": "{error message if any}"
 }
 ```
@@ -137,73 +136,72 @@ JSON response:
 
 #### API to upload a video
 1. Client first calls YouTube's upload API
-```
-POST /api/upload/initiate
-
-{
-    "file_name": "my_video.mp4",
-    "file_size": 50000000,
-    "chunked": true
-}
-```
-Response from YouTube server:
-```JSON
-{
-  "upload_url": "https://video-platform.com/api/upload/12345",
-  "upload_id": "{upload_id}",
-  "chunked": true
-} 
-```
+    ```
+    POST /api/upload/initiate
+    
+    {
+        "file_name": "my_video.mp4",
+        "file_size": 50000000,
+        "chunked": true
+    }
+    ```
+    Response from YouTube server:
+    ```JSON
+    {
+      "upload_url": "https://video-platform.com/api/upload/12345",
+      "upload_id": "{upload_id}",
+      "chunked": true
+    } 
+    ```
 2. If file is small, it can be uploaded as a single chunk
-```http
-POST /api/upload/{upload_id}
-Host: video-platform.com
-Authorization: Bearer YOUR_ACCESS_TOKEN
-Content-Type: video/mp4
-Content-Length: 50000000
+    ```http
+    POST /api/upload/{upload_id}
+    Host: video-platform.com
+    Authorization: Bearer YOUR_ACCESS_TOKEN
+    Content-Type: video/mp4
+    Content-Length: 50000000
+    
+    [binary video data]
+    ```
 
-[binary video data]
-```
-
-Else, it can be uploaded in chunks
-```http
-PUT /api/upload/{upload_id}
-Host: video-platform.com
-Authorization: Bearer YOUR_ACCESS_TOKEN
-Content-Type: video/mp4
-Content-Range: bytes 0-999999/50000000
-
-[binary video data]
-```
-Here, `Content-Range` is provided instead of `Content-Length`.
-
+    Else, it can be uploaded in chunks
+    ```http
+    PUT /api/upload/{upload_id}
+    Host: video-platform.com
+    Authorization: Bearer YOUR_ACCESS_TOKEN
+    Content-Type: video/mp4
+    Content-Range: bytes 0-999999/50000000
+    
+    [binary video data]
+    ```
+    Here, `Content-Range` is provided instead of `Content-Length`.
 3. Once all chunks are uploaded, the client notifies the server.
-```
-POST /api/upload/complete
-
-{
-    "upload_id": "{upload_id}"
-}
-```
-Response JSON contains `video_id`:
-```json
-{
-    "video_id": "{video_id}",
-    "status": "processing"
-}
-```
+    ```
+    POST /api/upload/complete
+    
+    {
+        "upload_id": "{upload_id}"
+    }
+    ```
+    Response JSON contains `video_id`:
+    ```json
+    {
+        "video_id": "{video_id}",
+        "status": "processing"
+    }
+    ```
 4. Creator can check for video upload status using the `video_id`
-```
-GET /api/upload/status?id={video_id}
-```
-JSON response:
-```json
-{
-    "video_id": "{video_id}",
-    "status": "ready",
-    "stream_url": "https://video-platform.com/watch?v={video_id}"
-}
-```
+    ```
+    GET /api/upload/status?id={video_id}
+    ```
+    JSON response:
+    ```json
+    {
+        "video_id": "{video_id}",
+        "status": "ready",
+        "stream_url": "https://video-platform.com/watch?v={video_id}"
+    }
+    ```
 
 #### API to get a list of all videos uploaded by user
 ```
@@ -215,7 +213,7 @@ JSON response:
   "channel_id": "{channel_id}",
   "user_id": "{user_id}",
   "uploadedVideos": [
-    "video_id_1", "video_id_2",...
+    "video_id_1", "video_id_2"
   ]
 }
 ```
@@ -275,7 +273,7 @@ This is a simple schema for `Comments` table. `parent_comment_id` helps create a
 ### Creator flow
 1. Creator triggers upload API.
 2. Request is validated by API gateway and forwarded to `Upload Service`.
-3. `Upload Service` responds with an URL to an object storage where raw video file can be uploaded. Either a signed URL or a auth token is sent with the response so that creator can authorize to the object storage.
+3. `Upload Service` responds with a URL to an object storage where raw video file can be uploaded. Either a signed URL or an auth token is sent with the response so that creator can authorize to the object storage.
 4. Creator uploads raw video to the object storage.
 5. Once upload is complete, creator triggers a completion API.
 6. Upon receipt of the completion request, `Upload Service` publishes an event to a Message Queue which is picked up by one of the video processing workers. This is handled asynchronously to balance the load on the workers.

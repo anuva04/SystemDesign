@@ -135,6 +135,6 @@ Also, in case of traffic spikes when each service has to be scaled out, a load b
 
 ## Follow-up questions
 1. What if we store user profiles and want to quickly fetch all the URLs created by a user?
-> We can create an index on `createdBy` field in `Url` table.
+    > We can create an index on `createdBy` field in `Url` table.
 2. How would you handle Analytics?
 3. How to handle URL generation if there is a sudden influx of write requests?
