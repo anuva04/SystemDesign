@@ -15,6 +15,7 @@ Table of contents:
   - [Elevator System](https://github.com/anuva04/SystemDesign/tree/main/LLD/ElevatorSystem)
   - [Vending Machine](https://github.com/anuva04/SystemDesign/tree/main/LLD/VendingMachine)
   - [Meeting Scheduler](https://github.com/anuva04/SystemDesign/tree/main/LLD/MeetingScheduler)
+  - [Digital Wallet](https://github.com/anuva04/SystemDesign/tree/main/LLD/DigitalWallet)
 - [Design Patterns](https://github.com/anuva04/SystemDesign/tree/main/DesignPatterns)
     - [Creational Patterns](https://github.com/anuva04/SystemDesign/tree/main/DesignPatterns/CreationalPatterns)
         - [Factory](https://github.com/anuva04/SystemDesign/blob/main/DesignPatterns/CreationalPatterns/FactoryPattern.java)
