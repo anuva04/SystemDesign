@@ -1,0 +1,4 @@
+enum SortBy {
+    AMOUNT,
+    TIMESTAMP
+}
