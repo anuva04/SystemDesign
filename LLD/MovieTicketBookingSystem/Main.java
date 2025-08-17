@@ -5,7 +5,7 @@ import java.util.concurrent.Executors;
 
 class Main {
     /**
-     * TODOS
+     * TODOS (improvements)
      * 1. Check if using incrementing static int is recommended for generating IDs
      * 2. Add Date in Show and other related places
      * 3. Add list of shows for each movie and movie search service. getShowsForMovie method in BookingService will probably not be required thereafter
