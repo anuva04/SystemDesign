@@ -16,6 +16,7 @@ Table of contents:
   - [Vending Machine](https://github.com/anuva04/SystemDesign/tree/main/LLD/VendingMachine)
   - [Meeting Scheduler](https://github.com/anuva04/SystemDesign/tree/main/LLD/MeetingScheduler)
   - [Digital Wallet](https://github.com/anuva04/SystemDesign/tree/main/LLD/DigitalWallet)
+  - [Movie Ticket Booking System](https://github.com/anuva04/SystemDesign/tree/main/LLD/MovieTicketBookingSystem)
 - [Design Patterns](https://github.com/anuva04/SystemDesign/tree/main/DesignPatterns)
     - [Creational Patterns](https://github.com/anuva04/SystemDesign/tree/main/DesignPatterns/CreationalPatterns)
         - [Factory](https://github.com/anuva04/SystemDesign/blob/main/DesignPatterns/CreationalPatterns/FactoryPattern.java)
