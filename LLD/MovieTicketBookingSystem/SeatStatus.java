@@ -1,0 +1,4 @@
+enum SeatStatus {
+    AVAILABLE,
+    BOOKED
+}
