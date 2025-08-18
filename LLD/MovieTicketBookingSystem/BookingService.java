@@ -22,38 +22,42 @@ class BookingService {
                 .collect(Collectors.toList());
     }
 
-    public Booking bookSeats(Show show, String userId, List<Seat> seatsToBook) throws BookingException {
-        if(seatsToBook.size() > MAX_SEATS_TO_BOOK) {
+    public Booking bookSeats(Show show, String userId, List<String> seatIdsToBook) throws BookingException {
+        if(seatIdsToBook.size() > MAX_SEATS_TO_BOOK) {
             throw new BookingException(String.format("Cannot book more than%d seats at once.", MAX_SEATS_TO_BOOK));
         }
 
         synchronized (show) {
-            for(Seat seat : seatsToBook) {
-                if(!show.getSeats().containsValue(seat)) {
+            for(String seatId : seatIdsToBook) {
+                if(!show.getSeats().containsKey(seatId)) {
                     throw new BookingException("Invalid seat selected for this show.");
                 }
-                if(seat.getStatus() != SeatStatus.AVAILABLE) {
-                    throw new BookingException("Seat " + seat.getSeatId() + " is already " + seat.getStatus() + ".");
+                if(show.getSeatStatus(seatId) != SeatStatus.AVAILABLE) {
+                    throw new BookingException("Seat " + seatId + " is already " + show.getSeatStatus(seatId) + ".");
                 }
             }
 
-            for (Seat seat : seatsToBook) {
-                seat.setStatus(SeatStatus.BOOKED);
+            for (String seatId : seatIdsToBook) {
+                show.setSeatStatus(seatId, SeatStatus.BOOKED);
             }
         }
 
-        Booking newBooking = new Booking(show, userId, seatsToBook);
+        Booking newBooking = new Booking(show, userId, seatIdsToBook);
         bookings.put(newBooking.getBookingId(), newBooking);
         return newBooking;
     }
 
-    public Booking getBookingForSeat(Show show, Seat seat) {
+    public Booking getBookingForSeat(Show show, String seatId) {
         for(Booking booking : bookings.values()) {
-            if(booking.getShow().equals(show) && booking.getSeats().contains(seat)) {
+            if(booking.getShow().equals(show) && booking.getSeatIds().contains(seatId)) {
                 return booking;
             }
         }
         return null;
+    }
+
+    public SeatStatus getSeatStatus(Show show, String seatId) {
+        return show.getSeatStatus(seatId);
     }
 
     public List<Booking> getBookingsForUser(String userId) {

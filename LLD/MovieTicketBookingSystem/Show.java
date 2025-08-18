@@ -1,19 +1,21 @@
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
+import java.time.LocalDate;
 
 class Show {
     private final String showId;
-    private static int nextShowId = 1;
     private final Movie movie;
     private final Screen screen;
     private final Showtime time;
+    private final LocalDate date;
     private final Map<String, Seat> seats;
 
-    public Show(Movie movie, Screen screen, Showtime time) {
+    public Show(Movie movie, Screen screen, Showtime time, LocalDate date) {
         this.movie = movie;
         this.screen = screen;
         this.time = time;
-        this.showId = "show" + nextShowId++;
+        this.showId = "show_" + UUID.randomUUID().toString();
+        this.date = date;
         this.seats = new ConcurrentHashMap<>();
 
         for(int row = 0; row < screen.getRows(); row++) {
@@ -47,5 +49,17 @@ class Show {
 
     public Seat getSeat(String seatId) {
         return seats.get(seatId);
+    }
+
+    public SeatStatus getSeatStatus(String seatId) {
+        return seats.get(seatId).getStatus();
+    }
+
+    public void setSeatStatus(String seatId, SeatStatus seatStatus) {
+        seats.get(seatId).setStatus(seatStatus);
+    }
+
+    public LocalDate getDate() {
+        return date;
     }
 }
