@@ -1,6 +1,7 @@
 import java.util.stream.Collectors;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 class BookingService {
     private final Map<String, Show> shows;
@@ -27,19 +28,52 @@ class BookingService {
             throw new BookingException(String.format("Cannot book more than%d seats at once.", MAX_SEATS_TO_BOOK));
         }
 
-        synchronized (show) {
-            for(String seatId : seatIdsToBook) {
-                if(!show.getSeats().containsKey(seatId)) {
-                    throw new BookingException("Invalid seat selected for this show.");
+        List<String> sortedSeatIds = seatIdsToBook.stream()
+                .sorted().collect(Collectors.toList());
+
+        for(String seatId : sortedSeatIds) {
+            if(!show.getSeats().containsKey(seatId)) {
+                throw new BookingException("Invalid seat selected for this show.");
+            }
+            if(show.getSeatStatus(seatId) != SeatStatus.AVAILABLE) {
+                throw new BookingException("Seat " + seatId + " is already " + show.getSeatStatus(seatId) + ".");
+            }
+        }
+
+        List<Seat> bookedSeats = new ArrayList<>();
+
+        try {
+            for(String seatId : sortedSeatIds) {
+                Seat seat = show.getSeat(seatId);
+                if(seat.getLock().tryLock(500, TimeUnit.MILLISECONDS)) {
+                    try {
+                        if(seat.getStatus() != SeatStatus.AVAILABLE) {
+                            throw new BookingException("Seat " + seat.getSeatId() + " is already " + seat.getStatus() + ".");
+                        }
+                        seat.setStatus(SeatStatus.BOOKED);
+                        bookedSeats.add(seat);
+                    } finally {
+                        seat.getLock().unlock();
+                    }
+                } else {
+                    throw new BookingException("Could not acquire lock for seat " + seat.getSeatId() + " within the timeout.");
                 }
-                if(show.getSeatStatus(seatId) != SeatStatus.AVAILABLE) {
-                    throw new BookingException("Seat " + seatId + " is already " + show.getSeatStatus(seatId) + ".");
+            }
+        } catch (BookingException | InterruptedException e) {
+            for(Seat seat : bookedSeats) {
+                seat.getLock().lock();
+                try {
+                    seat.setStatus(SeatStatus.AVAILABLE);
+                } finally {
+                    seat.getLock().unlock();
                 }
             }
 
-            for (String seatId : seatIdsToBook) {
-                show.setSeatStatus(seatId, SeatStatus.BOOKED);
+            if (e instanceof InterruptedException) {
+                Thread.currentThread().interrupt();
+                throw new BookingException("Booking was interrupted.");
             }
+            throw (BookingException)e;
         }
 
         Booking newBooking = new Booking(show, userId, seatIdsToBook);
