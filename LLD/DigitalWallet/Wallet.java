@@ -1,14 +1,18 @@
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.concurrent.locks.ReentrantLock;
+import java.util.concurrent.TimeUnit;
 class Wallet {
     private final String userId;
     private double balance;
     private final List<Transaction> transactionList;
+    private final ReentrantLock lock;
 
     public Wallet(String userId) {
         this.userId = userId;
         this.balance = 0.0;
         this.transactionList = new ArrayList<>();
+        this.lock = new ReentrantLock();
     }
 
     public String getUserId() {
@@ -54,28 +58,46 @@ class Wallet {
 
         Wallet firstLock = this.userId.compareTo(receiverWallet.getUserId()) < 0 ? this : receiverWallet;
         Wallet secondLock = this.userId.compareTo(receiverWallet.getUserId()) < 0 ? receiverWallet : this;
+        boolean firstLockAcquired = false;
+        boolean secondLockAcquired = false;
 
-        synchronized (firstLock) {
-            synchronized (secondLock) {
-                if (this.balance < amount) {
-                    return new TransactionResponse(false, "Insufficient balance.");
-                }
+        try {
+            firstLockAcquired = firstLock.lock.tryLock(100, TimeUnit.MILLISECONDS);
+            if(firstLockAcquired) {
+                secondLockAcquired = secondLock.lock.tryLock(100, TimeUnit.MILLISECONDS);
+                if(secondLockAcquired) {
+                    if (this.balance < amount) {
+                        return new TransactionResponse(false, "Insufficient balance.");
+                    }
 
-                balance -= amount;
-                TransactionResponse response = receiverWallet.loadWalletTransfer(amount, this);
+                    balance -= amount;
+                    TransactionResponse response = receiverWallet.loadWalletTransfer(amount, this);
 
-                if(response.isSuccess) {
-                    Transaction sentTransaction = new Transaction(userId, receiverWallet.getUserId(), amount, new Date(), TransactionType.SEND, balance);
-                    transactionList.add(sentTransaction);
+                    if(response.isSuccess) {
+                        Transaction sentTransaction = new Transaction(userId, receiverWallet.getUserId(), amount, new Date(), TransactionType.SEND, balance);
+                        transactionList.add(sentTransaction);
 
-                    return new TransactionResponse(true, String.format("Transaction amount %.2f to %s from %s", amount, receiverWallet.getUserId(), userId));
+                        return new TransactionResponse(true, String.format("Transaction amount %.2f to %s from %s", amount, receiverWallet.getUserId(), userId));
+                    } else {
+                        balance += amount;
+                        return new TransactionResponse(false, String.format("An error occured while transferring amount %.2f to %s from %s. Error message: %s", amount, receiverWallet.getUserId(), userId, response.message));
+                    }
                 } else {
-                    balance += amount;
-                    return new TransactionResponse(false, String.format("An error occured while transferring amount %.2f to %s from %s. Error message: %s", amount, receiverWallet.getUserId(), userId, response.message));
+                    return new TransactionResponse(false, "Could not acquire second lock within the timeout.");
                 }
+            } else {
+                return new TransactionResponse(false, "Could not acquire first lock within the timeout.");
+            }
+        } catch (InterruptedException e) {
+            return new TransactionResponse(false, "Transaction was interrupted.");
+        } finally {
+            if (firstLockAcquired) {
+                firstLock.lock.unlock();
+            }
+            if (secondLockAcquired) {
+                secondLock.lock.unlock();
             }
         }
-
     }
 
     public double getBalance() {
