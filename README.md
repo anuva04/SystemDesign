@@ -18,6 +18,7 @@ Table of contents:
   - [Digital Wallet](https://github.com/anuva04/SystemDesign/tree/main/LLD/DigitalWallet)
   - [Movie Ticket Booking System](https://github.com/anuva04/SystemDesign/tree/main/LLD/MovieTicketBookingSystem)
   - [Message Queue](https://github.com/anuva04/SystemDesign/tree/main/LLD/MessageQueue/src/main/java/org/anuva04)
+  - [Chess](https://github.com/anuva04/SystemDesign/tree/main/LLD/Chess/src/main/java/org/anuva04)
 - [Design Patterns](https://github.com/anuva04/SystemDesign/tree/main/DesignPatterns)
     - [Creational Patterns](https://github.com/anuva04/SystemDesign/tree/main/DesignPatterns/CreationalPatterns)
         - [Factory](https://github.com/anuva04/SystemDesign/blob/main/DesignPatterns/CreationalPatterns/FactoryPattern.java)
