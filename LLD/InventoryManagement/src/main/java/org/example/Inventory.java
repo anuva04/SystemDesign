@@ -1,5 +1,7 @@
 package org.example;
 
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -9,6 +11,7 @@ public class Inventory {
     private int quantity;
     private int minThreshold;
     private final ReentrantLock lock = new ReentrantLock();
+    private final Map<String, Integer> reservedStock = new ConcurrentHashMap<>();
 
     public Inventory(Product product, Warehouse warehouse, int quantity, int minThreshold) {
         this.product = product;
@@ -49,4 +52,16 @@ public class Inventory {
 
     public Product getProduct() { return product; }
     public Warehouse getWarehouse() { return warehouse; }
+
+    public void reserveStock(String orderId, int quantity) {
+        reservedStock.merge(orderId, quantity, Integer::sum);
+    }
+
+    public void releaseReservedStock(String orderId) {
+        reservedStock.remove(orderId);
+    }
+
+    public Map<String, Integer> getReservedStock() {
+        return reservedStock;
+    }
 }

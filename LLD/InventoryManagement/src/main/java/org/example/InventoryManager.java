@@ -184,6 +184,10 @@ public class InventoryManager {
         return inventory;
     }
 
+    public TransactionHistoryManager getHistoryManager() {
+        return historyManager;
+    }
+
     public void printStockLevels() {
         System.out.println("\n--- Current Stock Levels ---");
         for (Inventory inv : inventoryMap.values()) {
