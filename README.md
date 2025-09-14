@@ -19,6 +19,7 @@ Table of contents:
   - [Movie Ticket Booking System](https://github.com/anuva04/SystemDesign/tree/main/LLD/MovieTicketBookingSystem)
   - [Message Queue](https://github.com/anuva04/SystemDesign/tree/main/LLD/MessageQueue/src/main/java/org/anuva04)
   - [Chess](https://github.com/anuva04/SystemDesign/tree/main/LLD/Chess/src/main/java/org/anuva04)
+  - [Inventory Management system](https://github.com/anuva04/SystemDesign/tree/main/LLD/InventoryManagement/src/main/java/org/example)
 - [Design Patterns](https://github.com/anuva04/SystemDesign/tree/main/DesignPatterns)
     - [Creational Patterns](https://github.com/anuva04/SystemDesign/tree/main/DesignPatterns/CreationalPatterns)
         - [Factory](https://github.com/anuva04/SystemDesign/blob/main/DesignPatterns/CreationalPatterns/FactoryPattern.java)
